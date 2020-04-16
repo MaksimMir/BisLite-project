@@ -1,0 +1,39 @@
+.footer {
+    background-color: $gray;
+    padding-top: 30px;
+    &-items {
+        margin-bottom: 30px;
+    }
+    &-item.some {
+        width: 220px;
+    }
+    &-item.look {
+        width: 70px;
+        ul li {
+            margin-bottom: 5px;
+        }
+    }
+    &-item.view {
+        width: 100px;
+        ul li {
+            margin-bottom: 5px;
+        }
+    }
+    &-item.contact {
+        width: 170px;
+        p {
+            margin-bottom: 5px;
+        }
+    }
+    &-item.connect {
+        width: 200px;
+    }
+    &-item .content-title {
+        margin-bottom: 15px;
+    }
+    &-copyright .copyright-block p {
+        width: 80%;
+        padding: 15px 0;
+    }
+
+}

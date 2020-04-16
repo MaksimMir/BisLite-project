@@ -1,0 +1,39 @@
+.clients {
+    margin-bottom: 20px;
+    padding: 10px 0;
+    &-testimonials {
+        margin-right: 50px;
+        p {
+            width: 450px;
+            line-height: 17px;
+            padding-right: 50px;
+            margin-bottom: 20px;
+        }
+        i {
+            font-size: 14px;
+            font-weight: bold;
+        }
+    }
+    &-item {
+        width: 156px;
+        height: 85px;
+        text-align: center;
+        line-height: 120px;
+        border: 1px solid $gray;
+        background: radial-gradient(#ffffff 70%, #f1f2f6 100%);
+    }
+    &-box {
+        margin-top: 30px;
+        &-container {
+            border: 1px solid $blue;
+            border-radius: 5px;
+            background-color: #e8fcfe;
+            padding: 30px;
+            p {
+                font-size: 15px;
+                line-height: 20px;
+                width: 600px;
+            }
+        }
+    }
+}

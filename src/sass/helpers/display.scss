@@ -1,0 +1,28 @@
+.d-none {
+    display: none;
+}
+
+.d-block {
+    display: block;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.f-center {
+    justify-content: center;
+    align-items: center;
+}
+
+.f-space-a {
+    justify-content: space-around;
+}
+
+.f-space-b {
+    justify-content: space-between;
+}

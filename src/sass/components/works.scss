@@ -1,0 +1,24 @@
+.works {
+    &-top {
+        padding: 10px 0;
+    }
+    &-button {
+        line-height: 49px;
+        &-prev, &-next {
+            width: 15px;
+            height: 15px;
+            padding: 5px 10px;
+            border-radius: 60px;
+            background-color: $blue;
+            color: $white;
+            cursor: pointer;
+        }
+    }
+    &-carousel {
+        border-top: 2px solid $gray;
+        border-bottom: 2px solid $gray;
+        padding: 20px 0;
+        width: 100%;
+        overflow: hidden;
+    }
+}

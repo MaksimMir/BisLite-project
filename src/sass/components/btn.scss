@@ -1,0 +1,16 @@
+.btn {
+    padding: 20px 18px 20px 60px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: linear-gradient(#94f7ff 5%, #7fe3ec 10%, #7ee3ec 70%, #33b1cc 100%);
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px #bfd0d1;
+    outline: none;
+    border: none;
+    border-left: 1px solid #2aacc8;
+    border-top: 1px solid #2aacc8;
+    &:hover {
+        box-shadow: 3px 3px 7px #798f8f;;
+    }
+}

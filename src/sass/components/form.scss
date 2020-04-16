@@ -1,0 +1,62 @@
+.form {
+    padding: 30px 0;
+    & .title {
+        border-bottom: 1px solid $gray;
+    }
+    &-contact {
+        padding-top: 30px;
+        font-size: 15px;
+        &-us {
+            width: 600px;
+            p {
+                margin-bottom: 20px;
+                a {
+                    color: $blue;
+                    font-weight: 700;
+                }
+            }
+            label {
+                display: block;
+                margin-bottom: 10px;
+            }
+            input {
+                width: 450px;
+                padding: 10px;
+                margin-bottom: 20px;
+                border: 1px solid $gray;
+                &:focus {
+                    border: 1px solid $blue;
+                }
+            }
+            textarea {
+                width: 450px;
+                height: 150px;
+                border: 1px solid $gray;
+                padding: 10px;
+                margin-bottom: 20px;
+                &:focus {
+                    border: 1px solid $blue;
+                }
+            }
+        }
+        &-map {
+            .we-map {
+                width: 350px;
+                height: 270px;
+                border: 1px solid $blue;
+                padding: 22px;
+                background-color: #c8ffff;
+                margin-bottom: 30px;
+                p {
+                    font-size: 17px;
+                    font-weight: 700;
+                    color: #000000;
+                    margin-bottom: 15px;
+                }
+            }
+            .address {
+                width: 170px;
+            }
+        }
+    }
+}

@@ -1,0 +1,9 @@
+.icon {
+    width: 40px;
+    height: 40px;
+    display: block;
+    &-blue {
+        border-radius: 50px;
+        background-color: $blue;
+    }
+}
