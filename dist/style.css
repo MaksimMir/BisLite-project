@@ -103,13 +103,14 @@
   background-color: #2aacc8; }
   .bunner-carousel {
     display: block;
-    padding-top: 30px;
+    padding: 25px 0;
     width: 100%;
     position: relative;
     overflow: hidden; }
     .bunner-carousel-slides {
-      height: 100%;
-      display: flex; }
+      display: flex;
+      margin-left: 0;
+      transition: margin-left 1.2s; }
     .bunner-carousel-item {
       height: 100%; }
       .bunner-carousel-item .title {
@@ -122,8 +123,8 @@
         top: 130px; }
     .bunner-carousel-prev, .bunner-carousel-next {
       position: absolute;
-      top: 30px;
-      bottom: 30px;
+      top: 25px;
+      bottom: 28px;
       z-index: 1;
       display: flex;
       justify-content: center;
@@ -152,7 +153,7 @@
       background-color: #ffffff;
       opacity: 0.5;
       transition: opacity 0.4s; }
-      .bunner-dots .dot:hover {
+      .bunner-dots .dot:hover, .bunner-dots .dot.active {
         opacity: 1; }
 
 .icon {
@@ -162,14 +163,88 @@
   .icon-blue {
     border-radius: 50px;
     background-color: #2aacc8; }
+  .icon.icon-arrow-l {
+    background-image: url("image/icon/sprite.png");
+    background-position: 0px -143px;
+    width: 24px;
+    height: 24px; }
+  .icon.icon-arrow-t {
+    background: url("image/icon/sprite.png");
+    background-position: 5px -170px; }
+  .icon.icon-clients {
+    background-image: url("image/icon/sprite.png");
+    background-position: 5px -70px; }
+  .icon.icon-comments {
+    background-image: url("image/icon/sprite.png");
+    background-position: 5px -100px; }
+  .icon.icon-download {
+    background-image: url("image/icon/sprite.png");
+    background-position: 0px -314px;
+    width: 28px;
+    height: 26px; }
+  .icon.icon-dribbble {
+    background-image: url("image/icon/sprite.png");
+    background-position: 0px -422px;
+    width: 53px;
+    height: 51px; }
+  .icon.icon-email {
+    background-image: url("image/icon/sprite.png");
+    background-position: 5px -15px; }
+  .icon.icon-facebook {
+    background-image: url("image/icon/sprite.png");
+    background-position: 0px -483px;
+    width: 53px;
+    height: 51px; }
+  .icon.icon-fullscreen {
+    background-image: url("image/icon/sprite.png");
+    background-position: 10px -43px; }
+  .icon.icon-link {
+    background-image: url("image/icon/sprite.png");
+    background-position: 0px -350px; }
+  .icon.icon-linkedin {
+    background-image: url("image/icon/sprite.png");
+    background-position: 0px -544px;
+    width: 53px;
+    height: 51px; }
+  .icon.icon-paint {
+    background-image: url("image/icon/sprite.png");
+    background-position: 5px -379px; }
+  .icon.icon-pen {
+    background-image: url("image/icon/sprite.png");
+    background-position: 9px -205px; }
+  .icon.icon-pinterest {
+    background-image: url("image/icon/sprite.png");
+    background-position: 0px -605px;
+    width: 53px;
+    height: 51px; }
+  .icon.icon-plane {
+    background-image: url("image/icon/sprite.png");
+    background-position: 8px -237px; }
+  .icon.icon-preview {
+    background-image: url("image/icon/sprite.png");
+    background-position: 0px -279px; }
+  .icon.icon-share {
+    background-image: url("image/icon/sprite.png");
+    background-position: 0px -666px;
+    width: 53px;
+    height: 51px; }
+  .icon.icon-skype {
+    background-image: url("image/icon/sprite.png");
+    background-position: 0px -727px;
+    width: 53px;
+    height: 51px; }
+  .icon.icon-view-list {
+    background-image: url("image/icon/sprite.png");
+    background-position: 12px 10px; }
 
 .title {
   padding: 5px 0; }
   .title .content-title {
-    padding-left: 15px;
+    padding-left: 5px;
     line-height: 40px; }
 
 .btn {
+  position: relative;
   padding: 20px 18px 20px 60px;
   font-size: 16px;
   font-weight: bold;
@@ -183,6 +258,24 @@
   border-top: 1px solid #2aacc8; }
   .btn:hover {
     box-shadow: 3px 3px 7px #798f8f; }
+  .btn.btn-download::before {
+    content: '';
+    top: 15px;
+    left: 20px;
+    position: absolute;
+    background-image: url("image/icon/sprite.png");
+    background-position: 0px -314px;
+    width: 30px;
+    height: 30px; }
+  .btn.btn-submit::before {
+    content: '';
+    top: 15px;
+    left: 20px;
+    position: absolute;
+    background-image: url("image/icon/sprite.png");
+    background-position: 0px -143px;
+    width: 30px;
+    height: 30px; }
 
 .features {
   background-color: #e8ebf1; }
@@ -218,6 +311,8 @@
   padding: 20px 0;
   width: 100%;
   overflow: hidden; }
+  .works-carousel-images li {
+    margin: 0 10px; }
 
 .clients {
   margin-bottom: 20px;
@@ -272,6 +367,8 @@
       margin-bottom: 5px; }
   .footer-item.connect {
     width: 200px; }
+    .footer-item.connect a {
+      margin-bottom: 10px; }
   .footer-item .content-title {
     margin-bottom: 15px; }
   .footer-copyright .copyright-block p {
@@ -331,17 +428,21 @@
         width: 450px;
         padding: 10px;
         margin-bottom: 20px;
-        border: 1px solid #e8ebf1; }
+        border: 1px solid #e8ebf1;
+        border-radius: 3px; }
         .form-contact-us input:focus {
-          border: 1px solid #2aacc8; }
+          border: 1px solid #2aacc8;
+          outline: none; }
       .form-contact-us textarea {
         width: 450px;
         height: 150px;
         border: 1px solid #e8ebf1;
+        border-radius: 3px;
         padding: 10px;
         margin-bottom: 20px; }
         .form-contact-us textarea:focus {
-          border: 1px solid #2aacc8; }
+          border: 1px solid #2aacc8;
+          outline: none; }
     .form-contact-map .we-map {
       width: 350px;
       height: 270px;

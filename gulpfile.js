@@ -7,9 +7,20 @@ const sass = require("gulp-sass");
 const autoprefixer = require("autoprefixer");
 const cleanCSS = require("gulp-clean-css");
 const postcss = require("gulp-postcss");
+const spritesmith = require("gulp.spritesmith");
 
 
 const dist = "./dist";
+
+gulp.task('sprite', function () {
+  var spriteData = gulp.src('./src/image/icon/*.png').pipe(spritesmith({
+    imgName: 'sprite.png',
+    cssName: 'sprite.css',
+    padding: 10,
+    algorithm: 'top-down'
+  }));
+  return spriteData.pipe(gulp.dest(dist + '/image/icon'));
+});
 
 gulp.task("copy-html", () => {
     return gulp.src("./src/**.html")

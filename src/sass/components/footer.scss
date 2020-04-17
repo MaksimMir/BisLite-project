@@ -27,6 +27,9 @@
     }
     &-item.connect {
         width: 200px;
+        a {
+            margin-bottom: 10px;
+        }
     }
     &-item .content-title {
         margin-bottom: 15px;

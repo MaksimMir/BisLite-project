@@ -1,4 +1,5 @@
 .btn {
+    position: relative;
     padding: 20px 18px 20px 60px;
     font-size: 16px;
     font-weight: bold;
@@ -12,5 +13,25 @@
     border-top: 1px solid #2aacc8;
     &:hover {
         box-shadow: 3px 3px 7px #798f8f;;
+    }
+    &.btn-download::before {
+        content: '';
+        top: 15px;
+        left: 20px;
+        position: absolute;
+        background-image: url('image/icon/sprite.png');
+        background-position: 0px -314px;
+        width: 30px;
+        height: 30px;
+    }
+    &.btn-submit::before {
+        content: '';
+        top: 15px;
+        left: 20px;
+        position: absolute;
+        background-image: url('image/icon/sprite.png');
+        background-position: 0px -143px;
+        width: 30px;
+        height: 30px;
     }
 }

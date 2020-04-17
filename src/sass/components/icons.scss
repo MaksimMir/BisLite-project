@@ -6,4 +6,96 @@
         border-radius: 50px;
         background-color: $blue;
     }
+    &.icon-arrow-l {
+        background-image: url('image/icon/sprite.png');
+        background-position: 0px -143px;
+        width: 24px;
+        height: 24px;
+    }
+    &.icon-arrow-t {
+        background: url('image/icon/sprite.png');
+        background-position: 5px -170px;
+    }
+    &.icon-clients {
+        background-image: url('image/icon/sprite.png');
+        background-position: 5px -70px;
+    }
+    &.icon-comments {
+        background-image: url('image/icon/sprite.png');
+        background-position: 5px -100px;
+    }
+    &.icon-download {
+        background-image: url('image/icon/sprite.png');
+        background-position: 0px -314px;
+        width: 28px;
+        height: 26px;
+    }
+    &.icon-dribbble {
+        background-image: url('image/icon/sprite.png');
+        background-position: 0px -422px;
+        width: 53px;
+        height: 51px;
+    }
+    &.icon-email {
+        background-image: url('image/icon/sprite.png');
+        background-position: 5px -15px;
+    }
+    &.icon-facebook {
+        background-image: url('image/icon/sprite.png');
+        background-position: 0px -483px;
+        width: 53px;
+        height: 51px;
+    }
+    &.icon-fullscreen {
+        background-image: url('image/icon/sprite.png');
+        background-position: 10px -43px;
+    }
+    &.icon-link {
+        background-image: url('image/icon/sprite.png');
+        background-position: 0px -350px;
+    }
+    &.icon-linkedin {
+        background-image: url('image/icon/sprite.png');
+        background-position: 0px -544px;
+        width: 53px;
+        height: 51px;
+    }
+    &.icon-paint {
+        background-image: url('image/icon/sprite.png');
+        background-position: 5px -379px;
+    }
+    &.icon-pen {
+        background-image: url('image/icon/sprite.png');
+        background-position: 9px -205px;
+    }
+    &.icon-pinterest {
+        background-image: url('image/icon/sprite.png');
+        background-position: 0px -605px;
+        width: 53px;
+        height: 51px;
+    }
+    &.icon-plane {
+        background-image: url('image/icon/sprite.png');
+        background-position: 8px -237px;
+    }
+    &.icon-preview {
+        background-image: url('image/icon/sprite.png');
+        background-position: 0px -279px;
+    }
+    &.icon-share {
+        background-image: url('image/icon/sprite.png');
+        background-position: 0px -666px;
+        width: 53px;
+        height: 51px;
+    }
+    &.icon-skype {
+        background-image: url('image/icon/sprite.png');
+        background-position: 0px -727px;
+        width: 53px;
+        height: 51px;
+    }
+    &.icon-view-list {
+        background-image: url('image/icon/sprite.png');
+        background-position: 12px 10px;
+    }
 }

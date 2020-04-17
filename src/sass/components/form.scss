@@ -24,18 +24,22 @@
                 padding: 10px;
                 margin-bottom: 20px;
                 border: 1px solid $gray;
+                border-radius: 3px;
                 &:focus {
                     border: 1px solid $blue;
+                    outline: none;
                 }
             }
             textarea {
                 width: 450px;
                 height: 150px;
                 border: 1px solid $gray;
+                border-radius: 3px;
                 padding: 10px;
                 margin-bottom: 20px;
                 &:focus {
                     border: 1px solid $blue;
+                    outline: none;
                 }
             }
         }
