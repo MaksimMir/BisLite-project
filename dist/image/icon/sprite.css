@@ -1,0 +1,132 @@
+/*
+Icon classes can be used entirely standalone. They are named after their original file names.
+
+Example usage in HTML:
+
+`display: block` sprite:
+<div class="icon-home"></div>
+
+To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+
+// CSS
+.icon {
+  display: inline-block;
+}
+
+// HTML
+<i class="icon icon-home"></i>
+*/
+.icon-arrow-l {
+  background-image: url(sprite.png);
+  background-position: 0px -143px;
+  width: 24px;
+  height: 24px;
+}
+.icon-arrow-t {
+  background-image: url(sprite.png);
+  background-position: 0px -177px;
+  width: 14px;
+  height: 24px;
+}
+.icon-clients {
+  background-image: url(sprite.png);
+  background-position: 0px -80px;
+  width: 24px;
+  height: 20px;
+}
+.icon-comments {
+  background-image: url(sprite.png);
+  background-position: 0px -110px;
+  width: 24px;
+  height: 23px;
+}
+.icon-download {
+  background-image: url(sprite.png);
+  background-position: 0px -314px;
+  width: 28px;
+  height: 26px;
+}
+.icon-dribbble {
+  background-image: url(sprite.png);
+  background-position: 0px -422px;
+  width: 53px;
+  height: 51px;
+}
+.icon-email {
+  background-image: url(sprite.png);
+  background-position: 0px -26px;
+  width: 24px;
+  height: 17px;
+}
+.icon-facebook {
+  background-image: url(sprite.png);
+  background-position: 0px -483px;
+  width: 53px;
+  height: 51px;
+}
+.icon-fullscreen {
+  background-image: url(sprite.png);
+  background-position: 0px -53px;
+  width: 21px;
+  height: 17px;
+}
+.icon-link {
+  background-image: url(sprite.png);
+  background-position: 0px -350px;
+  width: 20px;
+  height: 26px;
+}
+.icon-linkedin {
+  background-image: url(sprite.png);
+  background-position: 0px -544px;
+  width: 53px;
+  height: 51px;
+}
+.icon-paint {
+  background-image: url(sprite.png);
+  background-position: 0px -386px;
+  width: 30px;
+  height: 26px;
+}
+.icon-pen {
+  background-image: url(sprite.png);
+  background-position: 0px -211px;
+  width: 21px;
+  height: 24px;
+}
+.icon-pinterest {
+  background-image: url(sprite.png);
+  background-position: 0px -605px;
+  width: 53px;
+  height: 51px;
+}
+.icon-plane {
+  background-image: url(sprite.png);
+  background-position: 0px -245px;
+  width: 26px;
+  height: 24px;
+}
+.icon-preview {
+  background-image: url(sprite.png);
+  background-position: 0px -279px;
+  width: 35px;
+  height: 25px;
+}
+.icon-share {
+  background-image: url(sprite.png);
+  background-position: 0px -666px;
+  width: 53px;
+  height: 51px;
+}
+.icon-skype {
+  background-image: url(sprite.png);
+  background-position: 0px -727px;
+  width: 53px;
+  height: 51px;
+}
+.icon-view-list {
+  background-image: url(sprite.png);
+  background-position: 0px 0px;
+  width: 16px;
+  height: 16px;
+}

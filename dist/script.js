@@ -86,6 +86,22 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/core-js/internals/a-function.js":
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/internals/a-function.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function (it) {
+  if (typeof it != 'function') {
+    throw TypeError(String(it) + ' is not a function');
+  } return it;
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/internals/a-possible-prototype.js":
 /*!****************************************************************!*\
   !*** ./node_modules/core-js/internals/a-possible-prototype.js ***!
@@ -1118,6 +1134,20 @@ module.exports = {};
 
 /***/ }),
 
+/***/ "./node_modules/core-js/internals/native-promise-constructor.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/core-js/internals/native-promise-constructor.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
+
+module.exports = global.Promise;
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/internals/native-symbol.js":
 /*!*********************************************************!*\
   !*** ./node_modules/core-js/internals/native-symbol.js ***!
@@ -1149,6 +1179,36 @@ var inspectSource = __webpack_require__(/*! ../internals/inspect-source */ "./no
 var WeakMap = global.WeakMap;
 
 module.exports = typeof WeakMap === 'function' && /native code/.test(inspectSource(WeakMap));
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/internals/new-promise-capability.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/core-js/internals/new-promise-capability.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var aFunction = __webpack_require__(/*! ../internals/a-function */ "./node_modules/core-js/internals/a-function.js");
+
+var PromiseCapability = function (C) {
+  var resolve, reject;
+  this.promise = new C(function ($$resolve, $$reject) {
+    if (resolve !== undefined || reject !== undefined) throw TypeError('Bad Promise constructor');
+    resolve = $$resolve;
+    reject = $$reject;
+  });
+  this.resolve = aFunction(resolve);
+  this.reject = aFunction(reject);
+};
+
+// 25.4.1.5 NewPromiseCapability(C)
+module.exports.f = function (C) {
+  return new PromiseCapability(C);
+};
 
 
 /***/ }),
@@ -1535,6 +1595,29 @@ module.exports = global;
 
 /***/ }),
 
+/***/ "./node_modules/core-js/internals/promise-resolve.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/core-js/internals/promise-resolve.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var anObject = __webpack_require__(/*! ../internals/an-object */ "./node_modules/core-js/internals/an-object.js");
+var isObject = __webpack_require__(/*! ../internals/is-object */ "./node_modules/core-js/internals/is-object.js");
+var newPromiseCapability = __webpack_require__(/*! ../internals/new-promise-capability */ "./node_modules/core-js/internals/new-promise-capability.js");
+
+module.exports = function (C, x) {
+  anObject(C);
+  if (isObject(x) && x.constructor === C) return x;
+  var promiseCapability = newPromiseCapability.f(C);
+  var resolve = promiseCapability.resolve;
+  resolve(x);
+  return promiseCapability.promise;
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/internals/redefine.js":
 /*!****************************************************!*\
   !*** ./node_modules/core-js/internals/redefine.js ***!
@@ -1893,6 +1976,30 @@ var store = __webpack_require__(/*! ../internals/shared-store */ "./node_modules
 
 /***/ }),
 
+/***/ "./node_modules/core-js/internals/species-constructor.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/core-js/internals/species-constructor.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var anObject = __webpack_require__(/*! ../internals/an-object */ "./node_modules/core-js/internals/an-object.js");
+var aFunction = __webpack_require__(/*! ../internals/a-function */ "./node_modules/core-js/internals/a-function.js");
+var wellKnownSymbol = __webpack_require__(/*! ../internals/well-known-symbol */ "./node_modules/core-js/internals/well-known-symbol.js");
+
+var SPECIES = wellKnownSymbol('species');
+
+// `SpeciesConstructor` abstract operation
+// https://tc39.github.io/ecma262/#sec-speciesconstructor
+module.exports = function (O, defaultConstructor) {
+  var C = anObject(O).constructor;
+  var S;
+  return C === undefined || (S = anObject(C)[SPECIES]) == undefined ? defaultConstructor : aFunction(S);
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/internals/string-multibyte.js":
 /*!************************************************************!*\
   !*** ./node_modules/core-js/internals/string-multibyte.js ***!
@@ -2182,6 +2289,54 @@ addToUnscopables('entries');
 
 /***/ }),
 
+/***/ "./node_modules/core-js/modules/es.promise.finally.js":
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.promise.finally.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
+var IS_PURE = __webpack_require__(/*! ../internals/is-pure */ "./node_modules/core-js/internals/is-pure.js");
+var NativePromise = __webpack_require__(/*! ../internals/native-promise-constructor */ "./node_modules/core-js/internals/native-promise-constructor.js");
+var fails = __webpack_require__(/*! ../internals/fails */ "./node_modules/core-js/internals/fails.js");
+var getBuiltIn = __webpack_require__(/*! ../internals/get-built-in */ "./node_modules/core-js/internals/get-built-in.js");
+var speciesConstructor = __webpack_require__(/*! ../internals/species-constructor */ "./node_modules/core-js/internals/species-constructor.js");
+var promiseResolve = __webpack_require__(/*! ../internals/promise-resolve */ "./node_modules/core-js/internals/promise-resolve.js");
+var redefine = __webpack_require__(/*! ../internals/redefine */ "./node_modules/core-js/internals/redefine.js");
+
+// Safari bug https://bugs.webkit.org/show_bug.cgi?id=200829
+var NON_GENERIC = !!NativePromise && fails(function () {
+  NativePromise.prototype['finally'].call({ then: function () { /* empty */ } }, function () { /* empty */ });
+});
+
+// `Promise.prototype.finally` method
+// https://tc39.github.io/ecma262/#sec-promise.prototype.finally
+$({ target: 'Promise', proto: true, real: true, forced: NON_GENERIC }, {
+  'finally': function (onFinally) {
+    var C = speciesConstructor(this, getBuiltIn('Promise'));
+    var isFunction = typeof onFinally == 'function';
+    return this.then(
+      isFunction ? function (x) {
+        return promiseResolve(C, onFinally()).then(function () { return x; });
+      } : onFinally,
+      isFunction ? function (e) {
+        return promiseResolve(C, onFinally()).then(function () { throw e; });
+      } : onFinally
+    );
+  }
+});
+
+// patch native Promise.prototype for native async functions
+if (!IS_PURE && typeof NativePromise == 'function' && !NativePromise.prototype['finally']) {
+  redefine(NativePromise.prototype, 'finally', getBuiltIn('Promise').prototype['finally']);
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/modules/es.regexp.exec.js":
 /*!********************************************************!*\
   !*** ./node_modules/core-js/modules/es.regexp.exec.js ***!
@@ -2433,8 +2588,18 @@ module.exports = g;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_slider_bunner_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/slider/bunner-slider */ "./src/js/modules/slider/bunner-slider.js");
+/* harmony import */ var _modules_slider_mini_slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/slider/mini-slider */ "./src/js/modules/slider/mini-slider.js");
+/* harmony import */ var _modules_download__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/download */ "./src/js/modules/download.js");
+/* harmony import */ var _modules_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/form */ "./src/js/modules/form.js");
+/* harmony import */ var _modules_map__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/map */ "./src/js/modules/map.js");
+
+
+
+
 
 window.addEventListener('DOMContentLoaded', () => {
+  'use strict';
+
   new _modules_slider_bunner_slider__WEBPACK_IMPORTED_MODULE_0__["default"]({
     page: '.bunner-carousel-slides',
     dots: '.bunner-dots .dot',
@@ -2442,7 +2607,170 @@ window.addEventListener('DOMContentLoaded', () => {
     next: '.bunner-carousel-next',
     activeClass: 'active'
   }).init();
+  new _modules_slider_mini_slider__WEBPACK_IMPORTED_MODULE_1__["default"]({
+    page: '.works-carousel-images',
+    prev: '.works-button-prev',
+    next: '.works-button-next',
+    count: 2
+  }).init();
+  new _modules_download__WEBPACK_IMPORTED_MODULE_2__["default"]('.clients-box .btn-download').init();
+  new _modules_form__WEBPACK_IMPORTED_MODULE_3__["default"]('.form .form-contact-us').init();
+
+  try {
+    ymaps.ready(_modules_map__WEBPACK_IMPORTED_MODULE_4__["default"]);
+  } catch (error) {}
 });
+
+/***/ }),
+
+/***/ "./src/js/modules/download.js":
+/*!************************************!*\
+  !*** ./src/js/modules/download.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Download; });
+class Download {
+  constructor(btn) {
+    this.btn = document.querySelector(btn);
+    this.path = 'image/img-10.png';
+  }
+
+  downloadItem(path) {
+    let elem = document.createElement('a');
+    elem.setAttribute('href', path);
+    elem.setAttribute('download', 'picture');
+    elem.style.display = 'none';
+    document.body.append(elem);
+    elem.click();
+    document.body.removeChild(elem);
+  }
+
+  init() {
+    try {
+      this.btn.addEventListener('click', () => {
+        this.downloadItem(this.path);
+      });
+    } catch (error) {}
+  }
+
+}
+
+/***/ }),
+
+/***/ "./src/js/modules/form.js":
+/*!********************************!*\
+  !*** ./src/js/modules/form.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Form; });
+/* harmony import */ var core_js_modules_es_promise_finally__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.promise.finally */ "./node_modules/core-js/modules/es.promise.finally.js");
+/* harmony import */ var core_js_modules_es_promise_finally__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_finally__WEBPACK_IMPORTED_MODULE_0__);
+
+class Form {
+  constructor(form) {
+    try {
+      this.form = document.querySelector(form);
+      this.inputs = this.form.querySelectorAll('input');
+    } catch (error) {}
+
+    this.message = {
+      loading: 'Загрузка...',
+      success: 'Спасибо! Скоро мы с вами свяжемся.',
+      fealure: 'Что-то пошло не так...'
+    };
+    this.path = './question.php';
+  }
+
+  clearInputs() {
+    this.inputs.forEach(input => {
+      input.value = '';
+    });
+    this.form.querySelector('textarea').value = '';
+  }
+
+  checkMailInputs() {
+    try {
+      this.form.querySelector('[name=email]').addEventListener('keypress', evt => {
+        if (evt.key.match(/[^a-z 0-9 @ \.]/gi)) {
+          evt.preventDefault();
+        }
+      });
+    } catch (error) {}
+  }
+
+  async postData(url, data) {
+    let res = await fetch(url, {
+      method: 'POST',
+      body: data
+    });
+    return await res.text();
+  }
+
+  init() {
+    this.checkMailInputs();
+
+    try {
+      this.form.addEventListener('submit', evt => {
+        evt.preventDefault();
+        let statusMessage = document.createElement('div');
+        statusMessage.style.cssText = `
+                    margin-top: 15px;
+                    font-size: 18px;
+                    color: grey;
+                `;
+        this.form.append(statusMessage);
+        statusMessage.textContent = this.message.loading;
+        let formData = new FormData(this.form);
+        this.postData(this.path, formData).then(res => {
+          console.log(res);
+          statusMessage.textContent = this.message.success;
+        }).catch(() => {
+          statusMessage.textContent = this.message.fealure;
+        }).finally(() => {
+          this.clearInputs();
+          setTimeout(() => {
+            statusMessage.remove();
+          }, 5000);
+        });
+      });
+    } catch (error) {}
+  }
+
+}
+
+/***/ }),
+
+/***/ "./src/js/modules/map.js":
+/*!*******************************!*\
+  !*** ./src/js/modules/map.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+let init = () => {
+  window.myMap = new ymaps.Map("map", {
+    center: [55.76, 37.64],
+    zoom: 9
+  });
+  let geoCoder = ymaps.geocode('Always Street 265 0X - 125 - Canada');
+  geoCoder.then(res => {
+    let geoObject = res.geoObject.get(0);
+    let coords = geoObject.geometry._coordinates;
+    window.myMap.setCenter(coords, 12);
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (init);
 
 /***/ }),
 
@@ -2470,33 +2798,35 @@ class BunnerSlider extends _slider__WEBPACK_IMPORTED_MODULE_2__["default"] {
   }
 
   init() {
-    let width = window.getComputedStyle(this.page.parentNode).width;
+    try {
+      let width = window.getComputedStyle(this.page.parentNode).width;
 
-    for (const key of this.slides) {
-      key.style.width = width;
-    }
+      for (const key of this.slides) {
+        key.style.width = width;
+      }
 
-    let pos = 0;
-    this.page.style.width = 100 * this.slides.length + '%';
-    this.prev.addEventListener('click', evt => {
-      evt.preventDefault();
-      if (this.slideIndex < this.slides.length - 1) this.slideIndex++;
-      this.slideShow(width, pos);
-      this.classToggle();
-    });
-    this.next.addEventListener('click', evt => {
-      evt.preventDefault();
-      if (this.slideIndex > 0) this.slideIndex--;
-      this.slideShow(width, pos);
-      this.classToggle();
-    });
-    this.dot.forEach(dot => {
-      dot.addEventListener('click', () => {
-        this.slideIndex = dot.getAttribute('data-id');
+      let pos = 0;
+      this.page.style.width = 100 * this.slides.length + '%';
+      this.prev.addEventListener('click', evt => {
+        evt.preventDefault();
+        if (this.slideIndex < this.slides.length - 1) this.slideIndex++;
         this.slideShow(width, pos);
         this.classToggle();
       });
-    });
+      this.next.addEventListener('click', evt => {
+        evt.preventDefault();
+        if (this.slideIndex > 0) this.slideIndex--;
+        this.slideShow(width, pos);
+        this.classToggle();
+      });
+      this.dot.forEach(dot => {
+        dot.addEventListener('click', () => {
+          this.slideIndex = dot.getAttribute('data-id');
+          this.slideShow(width, pos);
+          this.classToggle();
+        });
+      });
+    } catch (error) {}
   }
 
   slideShow(width, pos) {
@@ -2509,6 +2839,52 @@ class BunnerSlider extends _slider__WEBPACK_IMPORTED_MODULE_2__["default"] {
       dot.classList.remove(this.activeClass);
     });
     this.dot[this.slideIndex].classList.add(this.activeClass);
+  }
+
+}
+
+/***/ }),
+
+/***/ "./src/js/modules/slider/mini-slider.js":
+/*!**********************************************!*\
+  !*** ./src/js/modules/slider/mini-slider.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return MiniSlider; });
+/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.string.replace */ "./node_modules/core-js/modules/es.string.replace.js");
+/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./slider */ "./src/js/modules/slider/slider.js");
+
+
+class MiniSlider extends _slider__WEBPACK_IMPORTED_MODULE_1__["default"] {
+  constructor(page, prev, next, count) {
+    super(page, prev, next, count);
+  }
+
+  init() {
+    try {
+      let width = window.getComputedStyle(this.slides[0]).width.replace(/px/g, '');
+      let pos = 0;
+      this.next.addEventListener('click', evt => {
+        evt.preventDefault();
+        if (this.slideIndex < this.slides.length - 4) this.slideIndex++;
+        this.slideShow(width, pos);
+      });
+      this.prev.addEventListener('click', evt => {
+        evt.preventDefault();
+        if (this.slideIndex > 0) this.slideIndex--;
+        this.slideShow(width, pos);
+      });
+    } catch (error) {}
+  }
+
+  slideShow(width, pos) {
+    pos = width * this.slideIndex;
+    this.page.style.marginLeft = -pos + 'px';
   }
 
 }
@@ -2532,11 +2908,11 @@ class Slider {
     next = null,
     prev = null,
     activeClass = '',
+    count = 1,
     autoplay
   } = {}) {
-    this.page = document.querySelector(page);
-
     try {
+      this.page = document.querySelector(page);
       this.slides = this.page.children;
     } catch (error) {}
 
@@ -2545,6 +2921,7 @@ class Slider {
     this.prev = document.querySelector(prev);
     this.next = document.querySelector(next);
     this.activeClass = activeClass;
+    this.count = count;
     this.autoplay = autoplay;
     this.slideIndex = 0;
   }

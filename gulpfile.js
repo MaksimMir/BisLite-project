@@ -10,7 +10,8 @@ const postcss = require("gulp-postcss");
 const spritesmith = require("gulp.spritesmith");
 
 
-const dist = "./dist";
+// const dist = "./dist";
+const dist = '../../Open Server/OSPanel/domains/parser.local/';
 
 gulp.task('sprite', function () {
   var spriteData = gulp.src('./src/image/icon/*.png').pipe(spritesmith({
@@ -23,7 +24,7 @@ gulp.task('sprite', function () {
 });
 
 gulp.task("copy-html", () => {
-    return gulp.src("./src/**.html")
+    return gulp.src("./src/**.**")
                 .pipe(gulp.dest(dist))
                 .pipe(browsersync.stream());
 });
@@ -82,11 +83,12 @@ gulp.task("watch", () => {
     
     gulp.watch("./src/*.html", gulp.parallel("copy-html"));
     gulp.watch("./src/image/*.png", gulp.parallel("copy-img"));
+    gulp.watch("./src/image/icon/*.png", gulp.parallel("sprite"));
     gulp.watch("./src/js/**/*.js", gulp.parallel("build-js"));
     gulp.watch("./src/sass/**/*.scss", gulp.parallel("build-sass"));
 });
 
-gulp.task("build", gulp.parallel("copy-html", "copy-img", "build-js", "build-sass"));
+gulp.task("build", gulp.parallel("copy-html", "copy-img", "sprite", "build-js", "build-sass"));
 
 gulp.task("prod", () => {
     gulp.src("./src/sass/style.scss")

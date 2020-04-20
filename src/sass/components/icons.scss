@@ -6,12 +6,6 @@
         border-radius: 50px;
         background-color: $blue;
     }
-    &.icon-arrow-l {
-        background-image: url('image/icon/sprite.png');
-        background-position: 0px -143px;
-        width: 24px;
-        height: 24px;
-    }
     &.icon-arrow-t {
         background: url('image/icon/sprite.png');
         background-position: 5px -170px;
@@ -23,12 +17,6 @@
     &.icon-comments {
         background-image: url('image/icon/sprite.png');
         background-position: 5px -100px;
-    }
-    &.icon-download {
-        background-image: url('image/icon/sprite.png');
-        background-position: 0px -314px;
-        width: 28px;
-        height: 26px;
     }
     &.icon-dribbble {
         background-image: url('image/icon/sprite.png');

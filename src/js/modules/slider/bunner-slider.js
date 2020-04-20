@@ -7,37 +7,41 @@ export default class BunnerSlider extends Slider{
     }
 
     init() {
-        let width = window.getComputedStyle(this.page.parentNode).width;
-        for (const key of this.slides) {
-            key.style.width = width;
-        }
-        let pos = 0;
-        this.page.style.width = 100 * this.slides.length + '%';
+        try {
+            let width = window.getComputedStyle(this.page.parentNode).width;
 
-        this.prev.addEventListener('click', (evt) => {
-            evt.preventDefault();
-    
-            if(this.slideIndex < this.slides.length - 1) this.slideIndex++;                       
-            this.slideShow(width, pos);
-            this.classToggle();
-        });
+            for (const key of this.slides) {
+                key.style.width = width;
+            }
 
-        this.next.addEventListener('click', (evt) => {
-            evt.preventDefault();
-                     
-            if(this.slideIndex > 0) this.slideIndex--;             
-            this.slideShow(width, pos);
-            this.classToggle();
-        })
+            let pos = 0;
+            this.page.style.width = 100 * this.slides.length + '%';
+
+            this.prev.addEventListener('click', (evt) => {
+                evt.preventDefault();
         
-        this.dot.forEach(dot => {
-            dot.addEventListener('click', () => {
-                this.slideIndex = dot.getAttribute('data-id');
-
-                this.slideShow(width, pos)
+                if(this.slideIndex < this.slides.length - 1) this.slideIndex++;                       
+                this.slideShow(width, pos);
                 this.classToggle();
             });
-        });   
+    
+            this.next.addEventListener('click', (evt) => {
+                evt.preventDefault();
+                         
+                if(this.slideIndex > 0) this.slideIndex--;             
+                this.slideShow(width, pos);
+                this.classToggle();
+            })
+            
+            this.dot.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    this.slideIndex = dot.getAttribute('data-id');
+    
+                    this.slideShow(width, pos)
+                    this.classToggle();
+                });
+            });
+        } catch (error) {}   
         
     }
 

@@ -21,8 +21,37 @@
         width: 100%;
         overflow: hidden;
         &-images {
+            margin-left: 0;
+            transition: margin-left 0.5s;
             li {
-                margin: 0 10px;
+                padding: 0 10px;
+                position: relative;
+                &::before {
+                    content: '';
+                    display: none;
+                    position: absolute;
+                    width: 70px;
+                    height: 30px;
+                    top: 105px;
+                    left: 90px;
+                    background: url('image/icon/sprite.png') no-repeat 0 -277px,
+                                url('image/icon/sprite.png') no-repeat 40px -348px;
+                    z-index: 10;
+                }
+                &::after {
+                    content: '';
+                    display: none;
+                    position: absolute;
+                    width: 220px;
+                    height: 50%;
+                    background-color: $blue;
+                    top: 80px;
+                    left: 10px;
+                }
+                &:hover::after,
+                &:hover::before {
+                    display: block;
+                }
             }
         }
     }

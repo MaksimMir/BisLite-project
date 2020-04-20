@@ -311,8 +311,33 @@
   padding: 20px 0;
   width: 100%;
   overflow: hidden; }
-  .works-carousel-images li {
-    margin: 0 10px; }
+  .works-carousel-images {
+    margin-left: 0;
+    transition: margin-left 0.5s; }
+    .works-carousel-images li {
+      padding: 0 10px;
+      position: relative; }
+      .works-carousel-images li::before {
+        content: '';
+        display: none;
+        position: absolute;
+        width: 70px;
+        height: 30px;
+        top: 105px;
+        left: 90px;
+        background: url("image/icon/sprite.png") no-repeat 0 -277px, url("image/icon/sprite.png") no-repeat 40px -348px;
+        z-index: 10; }
+      .works-carousel-images li::after {
+        content: '';
+        display: none;
+        position: absolute;
+        width: 220px;
+        height: 50%;
+        background-color: #2aacc8;
+        top: 80px;
+        left: 10px; }
+      .works-carousel-images li:hover::after, .works-carousel-images li:hover::before {
+        display: block; }
 
 .clients {
   margin-bottom: 20px;
@@ -392,7 +417,29 @@
     padding-top: 30px;
     border-bottom: 1px solid #e8ebf1; }
     .portfolio-icons li {
-      margin-bottom: 30px; }
+      margin-bottom: 30px;
+      position: relative; }
+      .portfolio-icons li::before {
+        content: '';
+        display: none;
+        position: absolute;
+        width: 70px;
+        height: 30px;
+        top: 105px;
+        left: 80px;
+        background: url("image/icon/sprite.png") no-repeat 0 -277px, url("image/icon/sprite.png") no-repeat 40px -348px;
+        z-index: 10; }
+      .portfolio-icons li::after {
+        content: '';
+        display: none;
+        position: absolute;
+        width: 220px;
+        height: 49%;
+        background-color: #2aacc8;
+        top: 80px;
+        left: 0; }
+      .portfolio-icons li:hover::after, .portfolio-icons li:hover::before {
+        display: block; }
   .portfolio-nav {
     width: 300px;
     margin: 0 auto;
@@ -455,5 +502,9 @@
         font-weight: 700;
         color: #000000;
         margin-bottom: 15px; }
+      .form-contact-map .we-map #map {
+        display: block;
+        width: 300px;
+        height: 200px; }
     .form-contact-map .address {
       width: 170px; }
